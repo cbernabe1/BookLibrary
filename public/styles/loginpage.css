@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
+}
+
+.container{
+    padding: 20px 40px;
+    border-radius: 10px;
+    background-color: cornflowerblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.inputfield, .submitlogin{
+    padding: 10px 5px;
+    border-radius: 3px;
+    border: none;
+    width: 300px;
+}
+
+.submitlogin:hover{
+    cursor: pointer;
+    background-color: white;
+}
+
+.signup-form{
+    display: flex;
+    gap: 10px;
+    color: beige;
+}
+
+.btnsignup{
+    border: none;
+    background-color: cornflowerblue;
+    text-decoration: underline;
+    color: bisque;
+    cursor: pointer;
+}
+
+.btnsignup:hover{
+   color: beige;
+}
+

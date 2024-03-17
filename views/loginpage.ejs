@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookLibrary</title>
+    <link rel="stylesheet" href="/styles/loginpage.css">
 </head>
 <body>
     <div class="container">
         <h1>Login</h1>
-        <form action="" method="post">
-            <input type="text">
-            <input type="password">
-            <input type="submit" name="submit" id="" placeholder="Submit">
+        <form class="input-login" action="/login" method="post">
+            <input class="inputfield" type="text" placeholder="Enter your email">
+            <input class="inputfield" type="password" placeholder="Enter your password">
+            <input class="submitlogin" type="submit" name="submit" id="" placeholder="Login">
         </form>
-        <form action="" method="post">
-        
+        <form class="signup-form" action="/signup" method="get">
+            <p>Are you new?</p>
+            <button class="btnsignup" type="submit" >Signup</button>
         </form>
     </div>
 </body>

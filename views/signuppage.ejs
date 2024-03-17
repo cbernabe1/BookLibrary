@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookLibrary</title>
+    <link rel="stylesheet" href="/styles/signuppage.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Signup</h1>
+        <form class="input-login" action="/register" method="post">
+            <input class="inputfield" name="email" type="text" placeholder="Enter email">
+            <input class="inputfield" name="password" type="password" placeholder="Enter password">
+             <p id="errormessage" hidden><% locals.error ? error : ""%></p>
+            <input class="submitlogin" type="submit" name="submit" id="" placeholder="Login">
+        </form>
+        <form class="signup-form" action="/" method="get">
+            <p>Already created an account?</p>
+            <button class="btnsignup" type="submit" >Login</button>
+        </form>
+    </div>
+</body>
+</html>
