@@ -29,6 +29,14 @@
                     <h2 class="title">Title: <%= book.name %></h2>
                     <p class="description"> Description: <%= book.description %></p>
                     <p class="author">Author: <%= book.author %></p>
+                    <div class="button-container">
+                        <form action="/edit" method="post">
+                            <button class="editbtn" type="submit" name="edit" value="<%= book.id %>"><img src="icons/edit.png" alt=""></button>
+                        </form>
+                        <form action="/delete" method="post">
+                            <button class="deletebtn" name="delete" type="submit" value="<%= book.id %>"><img src="icons/delete.png" alt=""></button>
+                        </form>   
+                    </div>
                 </li>
             <%})  %>
         </ul>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookLibrary</title>
+    <link rel="stylesheet" href="/styles/addbook.css">
+</head>
+<body>
+    <div class="container">
+        <form action="/editbook" method="post">
+            <h1>EDIT BOOK</h1>
+            <input hidden type="text" name="id" value="<%= edit.id %>">
+            <input type="text" name="name" value="<%= edit.name %>" placeholder="Enter title of the book">
+            <input type="text" name="description" value="<%= edit.description %>" placeholder="Enter description of the book">
+            <input type="text" name="author" value="<%= edit.author %>" placeholder="Enter the author of the book">
+            <button type="submit">Edit Book</button>
+        </form>
+    </div>
+</body>
+</html>

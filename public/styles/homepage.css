@@ -83,3 +83,19 @@ nav ul{
     text-transform: uppercase;
     font-weight: 700;
 }
+
+img{
+    width: 20px;
+    height: 20px;
+}
+
+.button-container{
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.editbtn, .deletebtn{
+    border: none;
+    background-color: transparent;
+}
