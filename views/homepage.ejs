@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookLibrary</title>
+    <link rel="stylesheet" href="/styles/homepage.css">
+</head>
+<body>
+    <nav>
+        <h3>BookLibrary</h3>
+        <ul>
+            <li><p>User: <%= username %></p></li>
+            <li>
+                <form action="/" method="get">
+                    <button class="logoutbtn" type="submit">Logout</button>
+                </form>
+            </li>
+        </ul>  
+    </nav>
+    <div class="body-container">
+    <div class="container">
+        <form class="addbook" action="/addpage" method="get">
+            <button class="addbtn" type="submit">Add book</button>
+        </form>
+        <ul class="ulbooks">
+            <% books.forEach(function(book){ %>
+                <li class="listofbooks">
+                    <h2 class="title">Title: <%= book.name %></h2>
+                    <p class="description"> Description: <%= book.description %></p>
+                    <p class="author">Author: <%= book.author %></p>
+                </li>
+            <%})  %>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
