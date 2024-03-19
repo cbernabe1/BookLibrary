@@ -1,9 +1,10 @@
 import express from 'express';
 import pg from 'pg';
 import bodyParser from 'body-parser';
-
+import axios from 'axios';
 const app = express();
 const port = 3000;
+const API_URL = "https://openlibrary.org/search.json";
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
@@ -16,10 +17,11 @@ const db = new pg.Client({
     port: 5432
 });
 db.connect();
-const currentUser = [];
+let currentUser = [];
 const date = new Date().toJSON();
 
 app.get("/",(req,res) =>{
+    currentUser = [];
     res.render("loginpage.ejs");
 });
 
@@ -53,8 +55,8 @@ try {
     const email = req.body.emailfield;
     const password = req.body.passwordfield;
     const result = await db.query("SELECT * FROM users WHERE email = $1 AND password = $2",[email,password]);
-    
     currentUser.push(result.rows[0]);
+    console.log(currentUser);
     if(result.rowCount === 1){
         const book = await getBooks();
         res.render("homepage.ejs",{username: email, books: book});
@@ -88,7 +90,8 @@ app.post("/addbook",async(req,res)=>{
         const name = req.body.name;
         const description = req.body.description;
         const author = req.body.author;
-        const result = await db.query("INSERT INTO books (name,description,author,user_id,date_added) VALUES ($1,$2,$3,$4,$5)",[name,description,author,currentUser[0].id,date]);
+        const rating = req.body.rating;
+        const result = await db.query("INSERT INTO books (name,description,author,user_id,date_added) VALUES ($1,$2,$3,$4,$5,$6)",[name,description,author,currentUser[0].id,date,rating]);
         if(result.rowCount === 1){
             const book = await getBooks();
             res.render("homepage.ejs",{username: currentUser[0].email,books: book});
@@ -99,7 +102,7 @@ app.post("/addbook",async(req,res)=>{
         console.log(error);
     } 
 });
-
+ 
 app.post("/edit",async(req,res)=>{
    try {
     console.log(req.body.edit);
@@ -132,6 +135,15 @@ try {
     res.render("homepage.ejs",{username: currentUser[0].email,books: book});
 } catch (error) {
     console.log(error);
+}
+});
+
+app.post("/get-details",async(req,res)=>{
+try {
+    const response = await axios.get(API_URL+"?q="+req.body.name);
+    console.log(response);
+} catch (error) {
+    console.log(error)
 }
 });
  
