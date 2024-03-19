@@ -10,6 +10,7 @@
     <div class="container">
         <h1>Signup</h1>
         <form class="input-login" action="/register" method="post">
+            <input class="inputfield" name="name" type="text" placeholder="Enter name">
             <input class="inputfield" name="email" type="text" placeholder="Enter email">
             <input class="inputfield" name="password" type="password" placeholder="Enter password">
              <p id="errormessage" hidden><% locals.error ? error : ""%></p>

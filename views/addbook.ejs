@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookLibrary</title>
     <link rel="stylesheet" href="/styles/addbook.css">
 </head>
+
 <body>
     <div class="container">
         <h1>ADD BOOK</h1>
         <form action="/get-details" method="post">
             <input type="text" name="name" placeholder="Search the book you want to add">
-            <button type="submit" onclick="showDetails()">Search</button>
+            <button type="submit">Search</button>
         </form>
-        <form id="details" action="/addbook" method="post">
-            <input id="inputname" type="text" name="name" placeholder="Enter title of the book" hidden>
-            <input id="inputdescription" type="text" name="description" placeholder="Enter description of the book" hidden>
-            <input id="inputauthor" type="text" name="author" placeholder="Enter the author of the book" disabled hidden>
-            <input id="inputrating" type="text" name="rating" placeholder="Enter your rating in this book" hidden>
-            <button id="submit" type="submit" hidden>Add Book</button>
-        </form>
+        <% if(locals.fetch) { %>
+            <form id="details" action="/addbook" method="post">
+                <input id="inputname" type="text" name="name" placeholder="Enter title of the book">
+                <input id="inputdescription" type="text" name="description" placeholder="Enter description of the book">
+                <input id="inputauthor" type="text" name="author" value="<%= fetch %>" disabled>
+                <input id="inputrating" type="text" name="rating" placeholder="Enter your rating in this book">
+                <button id="submit" type="submit">Add Book</button>
+            </form>
+            <% } %>
     </div>
     <script>
-        function showDetails(){
-            document.getElementById("inputname").removeAttribute("hidden");
-            document.getElementById("inputdescription").removeAttribute("hidden");
-            document.getElementById("inputauthor").removeAttribute("hidden");
-            document.getElementById("inputrating").removeAttribute("hidden");
-            document.getElementById("submit").removeAttribute("hidden");
-        }
+        // function showDetails(){
+        //     document.getElementById("inputname").removeAttribute("hidden");
+        //     document.getElementById("inputdescription").removeAttribute("hidden");
+        //     document.getElementById("inputauthor").removeAttribute("hidden");
+        //     document.getElementById("inputrating").removeAttribute("hidden");
+        //     document.getElementById("submit").removeAttribute("hidden");
+        // }
     </script>
 </body>
+
 </html>

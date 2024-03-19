@@ -32,10 +32,11 @@ app.get("/signup",(req,res)=>{
 app.post("/register", async(req,res)=>{
 const email = req.body.email;
 const password = req.body.password;
+const name = req.body.name;
 try {
     const check = await db.query("SELECT email FROM users WHERE email = $1",[email]);
     if(check.rowCount === 0){
-    const result = await db.query("INSERT INTO users (email,password) VALUES ($1,$2)",[email,password]);
+    const result = await db.query("INSERT INTO users (email,password,name) VALUES ($1,$2,$3)",[email,password,name]);
     if(result.rowCount === 1){
         res.redirect("/");
     }
@@ -59,7 +60,7 @@ try {
     console.log(currentUser);
     if(result.rowCount === 1){
         const book = await getBooks();
-        res.render("homepage.ejs",{username: email, books: book});
+        res.render("homepage.ejs",{username: email, books: book, name:currentUser[0].name});
     }else{
         res.redirect("/");
     }
@@ -91,7 +92,8 @@ app.post("/addbook",async(req,res)=>{
         const description = req.body.description;
         const author = req.body.author;
         const rating = req.body.rating;
-        const result = await db.query("INSERT INTO books (name,description,author,user_id,date_added) VALUES ($1,$2,$3,$4,$5,$6)",[name,description,author,currentUser[0].id,date,rating]);
+        console.log(currentUser);
+        const result = await db.query("INSERT INTO books (name,description,author,user_id,date_added,rating) VALUES ($1,$2,$3,$4,$5,$6)",[name,description,author,currentUser[0].id,date,rating]);
         if(result.rowCount === 1){
             const book = await getBooks();
             res.render("homepage.ejs",{username: currentUser[0].email,books: book});
@@ -141,12 +143,13 @@ try {
 app.post("/get-details",async(req,res)=>{
 try {
     const response = await axios.get(API_URL+"?q="+req.body.name);
-    console.log(response);
+    console.log(response.data.docs[0].author_name);
+    res.render("addbook.ejs",{fetch: response.data.docs[0].author_name});
 } catch (error) {
     console.log(error)
 }
 });
- 
+  
 app.listen(port,()=>{
 console.log('Running on port ' + port );
 });
